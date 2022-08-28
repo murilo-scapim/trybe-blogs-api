@@ -6,18 +6,10 @@ const User = (sequelize, DataTypes) => {
       autoIncrement: true,
       allowNull: false,
     },
-    displayName: {
-      type: DataTypes.STRING,
-    },
-    email: {
-      type: DataTypes.STRING,
-    },
-    password: {
-      type: DataTypes.STRING,
-    },
-    image: {
-      type: DataTypes.STRING,
-    },
+    displayName: DataTypes.STRING,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING,
+    image: DataTypes.STRING,
   }, 
   { timestamps: false, tableName: 'Users' });
 
