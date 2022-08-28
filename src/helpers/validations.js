@@ -9,4 +9,16 @@ const validateLoginBody = (body) => {
     }
 };
 
-module.exports = validateLoginBody;
+const validateUserBody = (body) => {
+    const { error } = Schemas.userSchema.validate(body);
+    if (error) {
+        const err = new Error(error.details[0].message);
+        err.statusCode = 400;
+        throw err;
+    }
+}
+
+module.exports = {
+    validateLoginBody,
+    validateUserBody,
+};
