@@ -1,13 +1,20 @@
 const validations = require('../helpers/validations')
 const service = require('../services/user');
 
-const create = async(req, res) => {
+const create = async (req, res) => {
     validations.validateUserBody(req.body);
     const token = await service.create(req.body);
     
     res.status(201).json({ token });
 };
 
+const getAll = async (req, res) => {
+    const users = await service.getAll();
+    
+    res.status(200).json(users);
+}
+
 module.exports = {
     create,
+    getAll,
 };
