@@ -1,7 +1,7 @@
 const tokenHelper = require('../helpers/token');
-const { User } = require('../database/models')
+const { User } = require('../database/models');
 
-const login = async ({ email, password }) => {
+const login = async (email, password) => {
     const user = await User.findOne({ where: { email, password } });
 
     if (!user) {
