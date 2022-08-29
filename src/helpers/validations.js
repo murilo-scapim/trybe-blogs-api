@@ -16,9 +16,19 @@ const validateUserBody = (body) => {
         err.statusCode = 400;
         throw err;
     }
-}
+};
+
+const validateCategoryBody = (body) => {
+    const { error } = Schemas.categorySchema.validate(body);
+    if (error) {
+        const err = new Error(error.details[0].message);
+        err.statusCode = 400;
+        throw err;
+    }
+};
 
 module.exports = {
     validateLoginBody,
     validateUserBody,
+    validateCategoryBody,
 };
