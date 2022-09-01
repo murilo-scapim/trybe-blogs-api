@@ -8,5 +8,6 @@ const router = Router();
 router.use(validateToken); // todas rotas abaixo passam a validar o token
 
 router.post('/', rescue(PostController.create));
+router.get('/', rescue(PostController.findAll));
 
 module.exports = router;
