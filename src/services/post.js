@@ -41,13 +41,30 @@ const create = async (post, userId) => {
 }
 
 const findAll = async () =>
-   BlogPost.findAll({
+  BlogPost.findAll({
     include: [
       { model: User, as: 'user', attributes: { exclude: ['password'] } },
       { model: Category, as: 'categories', through: { attributes: [] } } ],
-   });
+  });
+
+const findOne = async (id) => {
+  const blogPost = await BlogPost.findOne({
+    where: { id },
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories', through: { attributes: [] } } ],
+  });
+
+  if (!blogPost) {
+    const err = new Error('Post does not exist');
+    err.statusCode = 404;
+    throw err;
+  }
+  return blogPost;
+};
 
 module.exports = {
   create,
   findAll,
+  findOne,
 };

@@ -12,7 +12,14 @@ const findAll = async (_req, res) => {
   return res.status(200).json(blogPosts);
 };
 
+const findOne = async (req, res) => {
+  const blogPost = await service.findOne(req.params.id);
+
+  return res.status(200).json(blogPost);
+}
+
 module.exports = {
   create,
   findAll,
+  findOne,
 };
