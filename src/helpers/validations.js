@@ -27,8 +27,18 @@ const validateCategoryBody = (body) => {
     }
 };
 
+const validateBlogPostBody = (body) => {
+    const { error } = Schemas.blogPostSchema.validate(body);
+    if (error) {
+        const err = new Error('Some required fields are missing');
+        err.statusCode = 400;
+        throw err;
+    }
+}
+
 module.exports = {
     validateLoginBody,
     validateUserBody,
     validateCategoryBody,
+    validateBlogPostBody,
 };

@@ -20,8 +20,16 @@ const categorySchema = Joi.object({
     name: Joi.string().required(),
 });
 
+const blogPostSchema = Joi.object({
+    title: Joi.string().not().empty().required(),
+    content: Joi.string().not().empty().required(),
+    categoryIds: Joi.array().items(
+        Joi.number().required()).min(1).required(),
+});
+
 module.exports = {
     loginSchema,
     userSchema,
     categorySchema,
+    blogPostSchema,
 };

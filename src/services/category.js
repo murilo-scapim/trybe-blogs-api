@@ -1,4 +1,4 @@
-const validations = require('../helpers/validations')
+const validations = require('../helpers/validations');
 const { Category } = require('../database/models');
 
 const create = async ({ name }) => {
