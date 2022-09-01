@@ -63,8 +63,24 @@ const findOne = async (id) => {
   return blogPost;
 };
 
+const update = async (post, postId, userId) => {
+    validations.validateBlogPostUpdate(post);
+    const result = await BlogPost.findByPk(postId);
+
+    if (userId !== result.userId) {
+        const err = new Error('Unauthorized user');
+        err.statusCode = 401;
+        throw err;
+    }
+
+    await BlogPost.update(post, { where: { id: postId } });
+
+    return findOne(postId);
+};
+
 module.exports = {
   create,
   findAll,
   findOne,
+  update,
 };

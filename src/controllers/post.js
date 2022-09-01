@@ -16,10 +16,17 @@ const findOne = async (req, res) => {
   const blogPost = await service.findOne(req.params.id);
 
   return res.status(200).json(blogPost);
-}
+};
+
+const update = async (req, res) => {
+  const blogPost = await service.update(req.body, req.params.id, req.user.id);
+
+  return res.status(200).json(blogPost);
+};
 
 module.exports = {
   create,
   findAll,
   findOne,
+  update,
 };
