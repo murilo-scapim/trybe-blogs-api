@@ -11,5 +11,6 @@ router.use(validateToken); // todas rotas abaixo passam a validar o token
 
 router.get('/', rescue(UserController.getAll));
 router.get('/:id', rescue(UserController.getById));
+router.delete('/me', rescue(UserController.destroy));
 
 module.exports = router;
