@@ -11,5 +11,6 @@ router.post('/', rescue(PostController.create));
 router.get('/', rescue(PostController.findAll));
 router.get('/:id', rescue(PostController.findOne));
 router.put('/:id', rescue(PostController.update));
+router.delete('/:id', rescue(PostController.destroy));
 
 module.exports = router;

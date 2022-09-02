@@ -64,18 +64,30 @@ const findOne = async (id) => {
 };
 
 const update = async (post, postId, userId) => {
-    validations.validateBlogPostUpdate(post);
-    const result = await BlogPost.findByPk(postId);
+  validations.validateBlogPostUpdate(post);
+  const result = await findOne(postId);
 
-    if (userId !== result.userId) {
-        const err = new Error('Unauthorized user');
-        err.statusCode = 401;
-        throw err;
-    }
+  if (userId !== result.userId) {
+    const err = new Error('Unauthorized user');
+    err.statusCode = 401;
+    throw err;
+  }
 
-    await BlogPost.update(post, { where: { id: postId } });
+  await BlogPost.update(post, { where: { id: postId } });
 
-    return findOne(postId);
+  return findOne(postId);
+};
+
+const destroy = async (postId, userId) => {
+  const result = await findOne(postId);
+
+  if (result.dataValues.userId != userId) {
+    const err = new Error('Unauthorized user');
+    err.statusCode = 401;
+    throw err;
+  }
+
+  await BlogPost.destroy({ where: { id: postId } });
 };
 
 module.exports = {
@@ -83,4 +95,5 @@ module.exports = {
   findAll,
   findOne,
   update,
+  destroy,
 };
